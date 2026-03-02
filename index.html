@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D. Pharm Free Learn | Premium Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">D.Pharm<span>FreeLearn</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#subjects">Subjects</a></li>
+            <li><a href="#">MCQs</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Master Your Pharmacy Diploma</h1>
+            <p>Access free, high-quality notes and study materials for 1st & 2nd Year.</p>
+            <a href="#subjects" class="btn">Start Learning</a>
+        </div>
+    </header>
+
+    <section id="subjects" class="subjects-container">
+        <div class="section-header fade-in">
+            <h2>Explore Course Materials</h2>
+            <p>Select your year to find structured, easy-to-read notes.</p>
+        </div>
+        
+        <div class="subject-grid">
+            <div class="subject-card fade-in">
+                <h3>1st Year</h3>
+                <p>Pharmaceutics, HAP, Social Pharmacy & more.</p>
+                <button onclick="showAlert('1st Year')">View Notes</button>
+            </div>
+            <div class="subject-card fade-in">
+                <h3>2nd Year</h3>
+                <p>Pharmacology, Law & Ethics, Biochemistry & more.</p>
+                <button onclick="showAlert('2nd Year')">View Notes</button>
+            </div>
+            <div class="subject-card fade-in">
+                <h3>Exit Exam Prep</h3>
+                <p>Practice MCQs designed for the PCI Exit Exam.</p>
+                <button onclick="showAlert('MCQs')">Start Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
