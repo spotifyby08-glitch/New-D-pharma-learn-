@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pharmaceutics I Notes | D-Pharma 1st Year | Free Learn</title>
+  <meta name="description" content="Free chapter-wise PDF notes for Pharmaceutics I (D-Pharma 1st Year) as per PCI syllabus." />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* Subject Hero Section */
+    .subject-hero {
+      background: linear-gradient(135deg, #1e2e6e 0%, #1e3a8a 55%, #0d5c5c 100%);
+      padding: 3rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .subject-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .subject-hero::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 56px;
+      background: var(--bg); clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    
+    .breadcrumbs {
+      position: relative; z-index: 1; text-align: center;
+      font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.7);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumbs a { color: #4ade80; text-decoration: none; transition: color 0.2s; }
+    .breadcrumbs a:hover { color: #fff; }
+    .breadcrumbs i { font-size: 0.7rem; margin: 0 0.4rem; color: rgba(255,255,255,0.4); }
+
+    /* Chapter List Styles */
+    .page-body { padding: 2.5rem 0 5rem; }
+    .chapters-container { max-width: 850px; margin: 0 auto; }
+    
+    .chapter-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .chapter-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, #1e3a8a, #3b5bdb);
+      border-radius: 14px 0 0 14px;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .chapter-card:hover {
+      transform: translateX(5px);
+      box-shadow: var(--shadow);
+      border-color: rgba(59,91,219,.3);
+    }
+    .chapter-card:hover::before { opacity: 1; }
+
+    .ch-num {
+      background: #eff6ff; color: #1e3a8a;
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .ch-info { flex: 1; }
+    .ch-title { font-size: 1.1rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.3rem; }
+    .ch-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    
+    .ch-actions { display: flex; gap: 0.6rem; flex-shrink: 0; flex-wrap: wrap; }
+    .btn-action {
+      border: none; padding: 0.55rem 1.1rem; border-radius: 8px;
+      font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.2s;
+    }
+    .btn-read { background: #eff6ff; color: #1e3a8a; }
+    .btn-read:hover { background: #1e3a8a; color: #fff; }
+    .btn-dl { background: #f0fdfa; color: #0d9488; }
+    .btn-dl:hover { background: #0d9488; color: #fff; }
+
+    /* Dark Mode specific overrides */
+    [data-theme="dark"] .chapter-card { background: #1e293b; border-color: #334155; }
+    [data-theme="dark"] .ch-title { color: #e2e8f0; }
+    [data-theme="dark"] .ch-num { background: #0f172a; color: #60a5fa; }
+    [data-theme="dark"] .btn-read { background: #0f172a; color: #60a5fa; }
+    [data-theme="dark"] .btn-dl { background: #0f172a; color: #2dd4bf; }
+
+    @media(max-width: 640px) {
+      .chapter-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .ch-actions { width: 100%; }
+      .btn-action { flex: 1; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-container">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo"><i class="fa-solid fa-flask-vial"></i></div>
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">D-Pharma Learn</span>
+      </div>
+    </a>
+    <div class="nav-cta">
+      <button class="theme-toggle-btn" id="themeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <a href="index.html" class="btn btn-primary btn-sm">Back to Home</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="subject-hero">
+    <div class="hero-inner">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i>
+        <a href="year1.html">1st Year</a> <i class="fa-solid fa-chevron-right"></i>
+        <span>Pharmaceutics I</span>
+      </div>
+      
+      <div class="hero-pill"><i class="fa-solid fa-mortar-pestle"></i> Subject Code: ER20-11T</div>
+      <h1 class="hero-title">Pharmaceutics I</h1>
+      <p class="hero-sub">Complete chapter-wise notes covering dosage forms, packaging, mixing, filtration, and formulation sciences as per the ER-2020 PCI syllabus.</p>
+      
+      <div class="hero-stats">
+        <div><div class="hs-num">07</div><div class="hs-lbl">Chapters</div></div>
+        <div><div class="hs-num">PDF</div><div class="hs-lbl">Format</div></div>
+        <div><div class="hs-num">100%</div><div class="hs-lbl">Free</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-body">
+    <div class="container chapters-container">
+      
+      <div class="sec-head reveal">
+        <h2>Syllabus & Notes</h2>
+        <a href="#"><i class="fa-solid fa-download"></i> Download Full Syllabus</a>
+      </div>
+
+      <div class="chapter-card reveal">
+        <div class="ch-num">1</div>
+        <div class="ch-info">
+          <div class="ch-title">History of the Profession of Pharmacy</div>
+          <div class="ch-desc">Pharmacy in India in relation to Science and Education, Pharmacy as a career, and the Indian Pharmacopoeia.</div>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-action btn-read"><i class="fa-solid fa-book-open-reader"></i> Read</a>
+          <a href="#" class="btn-action btn-dl"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+        </div>
+      </div>
+
+      <div class="chapter-card reveal">
+        <div class="ch-num">2</div>
+        <div class="ch-info">
+          <div class="ch-title">Packaging Materials</div>
+          <div class="ch-desc">Types of packaging (glass, plastic, rubber, metal), selection criteria, and their advantages/disadvantages.</div>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-action btn-read"><i class="fa-solid fa-book-open-reader"></i> Read</a>
+          <a href="#" class="btn-action btn-dl"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+        </div>
+      </div>
+
+      <div class="chapter-card reveal">
+        <div class="ch-num">3</div>
+        <div class="ch-info">
+          <div class="ch-title">Pharmaceutical Aids</div>
+          <div class="ch-desc">Organoleptic additives (coloring, flavoring, sweetening agents) and preservatives used in formulation.</div>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-action btn-read"><i class="fa-solid fa-book-open-reader"></i> Read</a>
+          <a href="#" class="btn-action btn-dl"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+        </div>
+      </div>
+
+      <div class="chapter-card reveal">
+        <div class="ch-num">4</div>
+        <div class="ch-info">
+          <div class="ch-title">Unit Operations</div>
+          <div class="ch-desc">Size reduction, size separation, mixing, filtration, and drying processes with equipment details.</div>
+        </div>
+        <div class="ch-actions">
+          <a href="#" class="btn-action btn-read"><i class="fa-solid fa-book-open-reader"></i> Read</a>
+          <a href="#" class="btn-action btn-dl"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+        </div>
+      </div>
+
+      <div class="chapter-card reveal" style="opacity: 0.6;">
+        <div class="ch-num" style="background: var(--bg-alt); color: var(--text-muted);">5</div>
+        <div class="ch-info">
+          <div class="ch-title">Tablets & Capsules</div>
+          <div class="ch-desc">Formulation, manufacturing defects, and evaluation of solid dosage forms. (Coming Soon)</div>
+        </div>
+        <div class="ch-actions">
+          <button class="btn-action" disabled style="background: var(--bg-alt); color: var(--text-muted); cursor: not-allowed;"><i class="fa-solid fa-lock"></i> Locked</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
