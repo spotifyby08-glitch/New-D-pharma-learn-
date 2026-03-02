@@ -1,67 +1,108 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap');
+/* ==========================================================================
+   D-Pharma Learn | Advanced CSS Architecture
+   Features: Design Tokens, Fluid Typography, Logical Properties, A11y
+   ========================================================================== */
 
-/* Base Variables (Light Mode) */
+/* --- 1. Design Tokens (Theme Variables) --- */
 :root {
-  --bg: #f8fafc;
-  --bg-alt: #e2e8f0;
-  --surface: #ffffff;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --primary-dark: #1e2e6e;
-  --primary-light: #3b5bdb;
-  --secondary: #0d9488;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Core Colors (RGB comma-separated for dynamic alpha transparency) */
+  --c-bg: 248, 250, 252;          /* #f8fafc */
+  --c-surface: 255, 255, 255;     /* #ffffff */
+  --c-text: 15, 23, 42;           /* #0f172a */
+  --c-text-muted: 100, 116, 139;    /* #64748b */
+  --c-border: 226, 232, 240;      /* #e2e8f0 */
+  
+  --c-primary: 59, 91, 219;       /* #3b5bdb */
+  --c-primary-dark: 30, 46, 110;  /* #1e2e6e */
+  --c-accent: 13, 148, 136;       /* #0d9488 */
+
+  /* Fluid Typography (Scales perfectly from 320px to 1200px screens) */
+  --step--1: clamp(0.75rem, 0.71rem + 0.18vw, 0.84rem);
+  --step-0: clamp(0.88rem, 0.82rem + 0.29vw, 1.00rem);
+  --step-1: clamp(1.03rem, 0.94rem + 0.44vw, 1.25rem);
+  --step-2: clamp(1.20rem, 1.08rem + 0.63vw, 1.56rem);
+  --step-3: clamp(1.41rem, 1.24rem + 0.87vw, 1.95rem);
+  --step-4: clamp(1.65rem, 1.41rem + 1.18vw, 2.44rem);
+  --step-5: clamp(1.93rem, 1.61rem + 1.59vw, 3.05rem);
+
+  /* Spacing & Radii */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Shadows & Easing */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgb(var(--c-primary) / 0.4);
+  
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dark Mode Variables */
+/* --- Dark Mode Overrides --- */
 [data-theme="dark"] {
-  --bg: #0f172a;
-  --bg-alt: #1e293b;
-  --surface: #1e293b;
-  --border: #334155;
-  --text: #f1f5f9;
-  --text-muted: #94a3b8;
-  --primary-dark: #cbd5e1;
-  --primary-light: #60a5fa;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --c-bg: 15, 23, 42;             /* #0f172a */
+  --c-surface: 30, 41, 59;        /* #1e293b */
+  --c-text: 241, 245, 249;        /* #f1f5f9 */
+  --c-text-muted: 148, 163, 184;  /* #94a3b8 */
+  --c-border: 51, 65, 85;         /* #334155 */
+  --c-primary-dark: 191, 219, 254;/* #bfdbfe */
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
 }
 
-/* Global Resets */
-* {
+/* --- 2. Modern Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Prevents anchor links from hiding under navbar */
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  transition: background-color 0.3s, color 0.3s;
-  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: var(--step-0);
+  background-color: rgb(var(--c-bg));
+  color: rgb(var(--c-text));
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
 }
 
+/* Accessibility: Keyboard Focus Outlines */
+:focus-visible {
+  outline: 2px solid rgb(var(--c-primary));
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- 3. Layout Utilities --- */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto; /* Logical property replacing margin-left/right */
 }
 
-/* Navbar Styles */
+/* --- 4. Component: Navigation --- */
 .site-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: rgb(var(--c-surface) / 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgb(var(--c-border));
   position: sticky;
   top: 0;
-  z-index: 100;
-  padding: 15px 20px;
+  z-index: 1000;
+  padding: var(--space-sm) 0;
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,156 +111,149 @@ body {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-xs);
   text-decoration: none;
-  color: var(--primary-dark);
+  color: rgb(var(--c-primary-dark));
 }
 
-.nav-logo {
-  font-size: 1.5rem;
-  color: var(--primary-light);
-}
-
-.nav-brand-name {
-  font-weight: 800;
-  font-size: 1.2rem;
-  display: block;
-}
-
-.nav-brand-tag {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-}
+.nav-logo { font-size: var(--step-3); color: rgb(var(--c-primary)); }
+.nav-brand-name { font-weight: 800; font-size: var(--step-1); line-height: 1.2; }
+.nav-brand-tag { font-size: var(--step--1); color: rgb(var(--c-text-muted)); display: block; }
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: var(--space-md);
   list-style: none;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: var(--text-muted);
+  color: rgb(var(--c-text-muted));
   font-weight: 600;
-  font-size: 0.9rem;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover, .nav-links a.active {
-  color: var(--primary-light);
+  color: rgb(var(--c-primary));
 }
 
-.nav-cta {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.theme-toggle-btn, .search-toggle-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-
+/* --- 5. Component: Buttons & Actions --- */
 .btn-primary {
-  background: var(--primary-light);
-  color: white;
-  padding: 8px 16px;
+  background: rgb(var(--c-primary));
+  color: #fff;
+  padding: 0.6rem 1.4rem;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.9rem;
-}
-
-/* Mobile Nav (Hidden by default) */
-.mobile-nav {
-  display: none;
-  flex-direction: column;
-  background: var(--surface);
-  padding: 20px;
-  position: fixed;
-  top: 70px;
-  left: 0;
-  right: 0;
-  border-bottom: 1px solid var(--border);
-  z-index: 99;
-}
-
-.mobile-nav.open {
-  display: flex;
-  gap: 15px;
-}
-
-.mobile-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.hamburger {
-  display: none;
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   border: none;
   cursor: pointer;
-  flex-direction: column;
-  gap: 4px;
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+  will-change: transform; /* Hint to browser for GPU acceleration */
 }
 
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: var(--text);
-  border-radius: 2px;
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
 
-/* Footer Styles */
-.site-footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 50px 0 20px;
-  margin-top: 50px;
+.theme-toggle-btn, .search-toggle-btn {
+  background: transparent;
+  border: none;
+  color: rgb(var(--c-text-muted));
+  font-size: var(--step-1);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
 }
 
-.footer-grid {
+.theme-toggle-btn:hover, .search-toggle-btn:hover {
+  background: rgb(var(--c-border));
+  color: rgb(var(--c-primary));
+}
+
+/* --- 6. Component: Cards Grid (Auto-fitting) --- */
+.sgrid, .fstrip, .update-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 30px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-md);
 }
 
-.footer-col h4 {
-  margin-bottom: 15px;
-  color: var(--primary-dark);
-}
-
-.footer-col ul {
-  list-style: none;
-}
-
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-  color: var(--text-muted);
+.scard, .fcard, .chapter-card {
+  background: rgb(var(--c-surface));
+  border: 1px solid rgb(var(--c-border));
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
   text-decoration: none;
-  font-size: 0.9rem;
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth), border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.footer-bottom {
-  text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.85rem;
+/* Performant Hover States (Only animating compositor properties) */
+.scard:hover, .fcard:hover, .chapter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgb(var(--c-primary) / 0.3);
 }
 
-/* Responsive */
+.sc-ttl, .fcard-ttl, .ch-title {
+  font-size: var(--step-1);
+  font-weight: 800;
+  color: rgb(var(--c-primary-dark));
+  margin-bottom: var(--space-xs);
+}
+
+.sc-dsc, .fcard-dsc, .ch-desc {
+  font-size: var(--step--1);
+  color: rgb(var(--c-text-muted));
+}
+
+/* --- 7. Utility & States --- */
+/* Hardware Accelerated Reveal Animation Class */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- 8. Responsive Adjustments --- */
 @media (max-width: 768px) {
   .nav-links, .nav-cta .btn-primary { display: none; }
-  .hamburger { display: flex; }
-  .footer-grid { grid-template-columns: 1fr; }
-    }
+  
+  /* Mobile Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  .hamburger span {
+    width: 25px;
+    height: 2px;
+    background: rgb(var(--c-text));
+    transition: 0.3s var(--ease-smooth);
+    transform-origin: left;
+  }
+  
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg); }
+  }
+             
